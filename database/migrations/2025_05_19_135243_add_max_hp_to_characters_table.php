@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('characters', function (Blueprint $table) {
-        $table->integer('max_hp')->default(100);
+        $table->integer('max_hp');
     });
     }
 

@@ -10,10 +10,13 @@ class Character extends Model
  protected $fillable = [
    'name',
    'user_id',
+   'class',
    'hp',
    'attack',
    'defense',
    'level',
-   'exp'
+   'exp',
+   'max_hp',
+   'avatar'
  ];
 }

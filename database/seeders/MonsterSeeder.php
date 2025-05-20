@@ -34,6 +34,16 @@ Monster::create([
 ]);
 
 Monster::create([
+    'name' => 'Skeleton',
+    'hp' => 40,
+    'max_hp' => 40,
+    'exp_reward' => 12,
+    'attack' => 12,
+    'defense' => 6,
+    'image' => 'https://www.dndbeyond.com/avatars/thumbnails/30835/849/1000/1000/638063922565505819.png',
+]);
+
+Monster::create([
     'name' => 'Orc',
     'hp' => 50,
     'max_hp' => 50,

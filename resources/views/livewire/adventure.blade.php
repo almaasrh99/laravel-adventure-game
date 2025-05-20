@@ -9,7 +9,7 @@
         <div class="w-full mx-auto bg-white p-6 rounded-lg shadow-lg space-y-6">
             <h2 class="text-2xl font-bold text-center">🗺️ Petualangan</h2>
 
-            @if ($character && $character->hp <= 0)
+            @if ( $gameCompleted && $character && $character->hp <= 0)
                 <div class="bg-red-100 text-red-700 p-4 rounded text-center">
                     💀 <strong>GAME OVER</strong><br>
                     Karaktermu telah dikalahkan. Mulai kembali atau buat karakter baru.
@@ -72,14 +72,15 @@
 
                             {{-- Player Health Bar --}}
                             @php
-                                $charHpPercent = ($character->hp / 100) * 100;
+                                $charHpPercent = ($character->hp / $character->max_hp) * 100;
                                 $charBarColor = $charHpPercent > 50 ? 'bg-green-500' : ($charHpPercent > 20 ? 'bg-yellow-500' : 'bg-red-500');
                             @endphp
                             <div class="">
                                 <div class="flex flex-col mx-auto gap-4 justify-start items-start">
-                                     <img src="https://divisionheaven.me/wp-content/uploads/2017/09/bonus_harold.png" alt="Player" class="w-24 h-24 rounded-full object-contain border-2 border-blue-500">
-                               <div class="flex gap-2 justify-center items-center">
-                                 <p class="text-lg font-semibold mb-1">{{ $character->name }}</p>
+                                     <img src="{{ asset($character->avatar) }}" alt="Player" class="w-24 h-24 rounded-full object-cover border-2 border-blue-500">
+                               <div class="flex gap-2 justify-start items-center">
+                                 <p class="text-lg font-semibold">{{ $character->name }}</p>
+                                 <p class="text-sm font-semibold text-gray-600"> ( {{ $character->class }} - Lv. {{ $character->level }} )</p>
                                
                                </div>
 
@@ -90,7 +91,7 @@
                                 </div>
                                 <div class="flex justify-between    items-center">
                                      <p class="text-sm font-semibold">EXP : <span class="text-orange-500">{{ $character->exp }}</span></p>
-                                <p class="text-sm font-semibold text-gray-700 mt-1">{{ $character->hp }} / {{ 100}} HP</p>
+                                <p class="text-sm font-semibold text-gray-700 mt-1">{{ $character->hp }} / {{ $character->max_hp }} HP</p>
                                 </div>
                             </div>
 
@@ -102,7 +103,7 @@
                             </button>
                             <button wire:click="heal"
                                 class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
-                                🩹 Heal (+20 HP)
+                                🩹 Heal (+{{ $healAmount }})
                             </button>
                             </div>
                         </div>
